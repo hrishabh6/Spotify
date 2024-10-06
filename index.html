@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>spotify</title>
+    <link rel="stylesheet" href="utility.css">
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        
+</head>
+
+<body>
+    <div class="container flex bg-black">
+        <div class="left border">
+
+            <div class="home rounded bg-grey rounded m1 p-1">
+
+                <img src="svgs/close.svg" alt="" class="close">
+
+
+                <div class="svgs/logo">
+                    <img src="svgs/logo.svg" alt="Logo" class="invert">
+                </div>
+                <ul>
+                    <li><img src="svgs/home.svg" alt="home" class="invert"> Home </li>
+                    <li><img src="svgs/search.svg" alt="home" class="invert"> Search </li>
+                </ul>
+
+            </div>
+            <div class="library bg-grey rounded m1">
+                <div class="heading">
+                    <img src="svgs/library.svg" alt="Library" class="invert  ">
+                    <h2>Your Library</h2>
+                </div>
+                <div class="songList">
+                    <ul>
+
+                    </ul>
+                </div>
+                <div class="footer">
+                    <div><a href="https://www.spotify.com/in-en/legal/"><span>Legal</span></a></div>
+                    <div><a href="https://www.spotify.com/in-en/safetyandprivacy/"><span>Safety &amp; Privacy
+                                Center</span></a></div>
+                    <div><a href="https://www.spotify.com/in-en/legal/privacy-policy/"><span>Privacy Policy</span></a>
+                    </div>
+                    <div><a href="https://www.spotify.com/in-en/legal/cookies-policy/"><span>Cookies</span></a></div>
+                    <div><a href="https://www.spotify.com/in-en/legal/privacy-policy/#s3"><span>About Ads</span></a>
+                    </div>
+                    <div><a href="https://www.spotify.com/in-en/accessibility/"><span>Accessibility</span></a></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="right bg-grey rounded">
+
+            <div class="header">
+                <div class="hamburgerContainer">
+                    <img src="svgs/hamburger.svg" alt="" class="hamburger">
+                    <div class="nav">
+                        <i class="fa-solid fa-chevron-left Nav-Icons"></i>
+                        <i class="fa-solid fa-chevron-right Nav-Icons"></i>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="badge bg-black btn-margins">Sign Up</button>
+                    <button class="badge btn-margins">Login</button>
+
+                </div>
+            </div>
+            <div class="spotifyPlaylist">
+                <h1>Spotify Playlist</h1>
+                <div class="cardContainer">
+                    
+                </div>
+            </div>
+            <div class="playbar">
+
+                <div class="seekbar" class="seekBar">
+                    <div class="seekCircle"></div>
+                </div>
+
+                <div class="aboveBar">
+                    <div class="songInfo">Name of songs</div>
+                    <div class="songButtons">
+                        <i class="fa-duotone fa-solid fa-backward" id="backward"></i>
+                        <i class="fa-sharp fa-solid fa-play " id="play"></i>
+                        <i class="fa-duotone fa-solid fa-forward " id="forward"></i>
+                        <img src="svgs/Volume.svg" class="volume" alt="volume-button">
+                        <input type="range" class="volSeekBar volume" id="volSeekBar">
+                    </div>
+                    
+                        <div class="songTime">00:00 / 00:00</div>                       
+                        
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
