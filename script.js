@@ -97,7 +97,7 @@ const playMusic = (trackPath, trackName,pause=false) => {
 }
 
 async function displayFolders() {
-    let a = await fetch(`/Songs/`)
+    let a = await fetch(`https://spotify-pi-blush.vercel.app/Songs/`)
     let response =  await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -113,7 +113,7 @@ async function displayFolders() {
         if (e.href.includes("/Songs/")) {         
             let folder = e.href.split("/")[4]
             //getting the meta data of the folders
-                let a = await fetch(`/Songs/${folder}/info.json`);
+                let a = await fetch(`https://spotify-pi-blush.vercel.app/Songs/${folder}/info.json`);
                 let response = await a.json();
                 cardContainer.innerHTML = cardContainer.innerHTML + `<div class="card" data-folder="${folder}">
                         <div class="circle">
@@ -141,7 +141,7 @@ async function main() {
     //get songs from directory
     songs = await getSongs("Songs/NonCopyrightSongs");
     
-    let url = "/Songs/"
+    let url = "https://spotify-pi-blush.vercel.app/Songs/"
 
     
     //show all the songs in the playlist
