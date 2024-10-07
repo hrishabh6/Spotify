@@ -29,33 +29,28 @@ async function getSongs(folder) {
     try {
         currFolder = folder;
 
-
+        // Fetch JSON from the GitHub API instead of folder contents
         let response = await fetch(folder);
-        let text = await response.text();
+        let data = await response.json(); // Parse JSON response
 
-        let div = document.createElement("div");
-        div.innerHTML = text;
-
-        let anchors = div.getElementsByTagName("a");
-        let anchorsArray = Array.from(anchors); // Convert HTMLCollection to Array
-
-        let songsArray = anchorsArray.filter(element => element.href.endsWith(".mp3")); // Filter for .mp3 links
-
-        // Convert songsArray to just the song names
-        songsArray = songsArray.map(element => element.href.split(`/${folder}/`)[1]);
+        // Filter for .mp3 files
+        let songsArray = data.filter(file => file.name.endsWith(".mp3"));
 
         // Assuming you have a reference to songsUL defined elsewhere in your code
         let songsUL = document.querySelector(".songList").getElementsByTagName("ul")[0];
         songsUL.innerHTML = ""; // Clear previous songs
 
-        for (const song of songsArray) { // Changed 'songs' to 'songsArray'
+        for (const song of songsArray) {
+            let songTitle = song.name.replaceAll("%20", " ").replaceAll("%", " ").replaceAll("2C", " ");
+            let downloadUrl = song.download_url; // Use the download_url from JSON
+
             songsUL.innerHTML += `
             <li>                
                 <i class="fa-duotone fa-solid fa-music music-icon"></i>
                 <div class="info">
-                    <div class="songTitle">${song.replaceAll("%20", " ").replaceAll("%", " ").replaceAll("2C", " ")}</div>
+                    <div class="songTitle">${songTitle}</div>
                     <div class="artist">BY Hrishabh</div>
-                    <div style="display: none;" class="path">${song}</div>
+                    <div style="display: none;" class="path">${downloadUrl}</div>
                 </div>
                 <div class="playNow">   
                     <span>Play Now</span>
@@ -66,7 +61,7 @@ async function getSongs(folder) {
 
         // Play the first song if available
         if (songsArray.length > 0) {
-            playMusic(songsArray[0], decodeURI(songsArray[0]), true);
+            playMusic(songsArray[0].download_url, decodeURI(songsArray[0].name), true);
         }
 
         // Add event listeners to each song item
@@ -76,9 +71,9 @@ async function getSongs(folder) {
             });
         });
 
-        return songsArray
+        return songsArray;
     } catch (error) {
-        console.error('Error fetching or parsing HTML data:', error);
+        console.error('Error fetching or parsing JSON data:', error);
     }
 }
 
