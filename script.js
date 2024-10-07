@@ -139,7 +139,7 @@ async function displayFolders() {
 
 async function main() {
     //get songs from directory
-    songs = await getSongs("https://raw.githubusercontent.com/hrishabh6/Spotify/main/Songs/NonCopyrightSongs/");
+    songs = await getSongs("https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/NonCopyrightSongs");
     
     let url = "/Songs/"
 
