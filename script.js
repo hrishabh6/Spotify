@@ -121,8 +121,8 @@ async function displayFolders() {
                         <i class="fa-sharp fa-solid fa-play"></i>
                     </div>
                     <img src="https://raw.githubusercontent.com/hrishabh6/Spotify/main/Songs/${folderName}/cover.jpeg" alt="${infoData.title}">
-                    <h4>${infoData.description}</h4>
-                    <p>${infoData.title}</p>
+                    <h4>${infoData.title}</h4>
+                    <p>${infoData.description}</p>
                 </div>
             `;
         }
@@ -132,7 +132,7 @@ async function displayFolders() {
             e.addEventListener("click", async () => {
                 // Accessing dataset folder correctly
                 let folder = e.dataset.folder;
-                let songs = await getSongs(`https://raw.githubusercontent.com/hrishabh6/Spotify/main/Songs/${folder}`);
+                let songs = await getSongs(`https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/${folder}`);
                 playMusic(songs[0], decodeURIComponent(songs[0]));
             });
         });
