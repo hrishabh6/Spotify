@@ -30,7 +30,7 @@ async function getSongs(folder) {
         currFolder = folder;
 
 
-        let response = await fetch(`/${folder}/`);
+        let response = await fetch(folder);
         let text = await response.text();
 
         let div = document.createElement("div");
