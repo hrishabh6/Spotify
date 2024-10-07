@@ -78,18 +78,22 @@ async function getSongs(folder) {
 }
 
 
-const playMusic = (trackPath, trackName,pause=false) => {
-    currentSong.src = `/${currFolder}/` + trackPath;
+const playMusic = (trackPath, trackName, pause = false) => {
+    // Set the current song's source to the full trackPath (which is already a full URL)
+    currentSong.src = trackPath;
+
     if (!pause) {
-        currentSong.play()
-        if (playIcon.classList.contains("fa-play")) {            
+        currentSong.play();
+        if (playIcon.classList.contains("fa-play")) {
             playIcon.classList.remove("fa-sharp", "fa-solid", "fa-play");
             playIcon.classList.add("fa-solid", "fa-pause");
         }
-
     }
-    document.querySelector(".songInfo").innerHTML = `${trackName}`
-}
+
+    // Update the song info with the track name
+    document.querySelector(".songInfo").innerHTML = `${trackName}`;
+};
+
 
 async function displayFolders() {
     let a = await fetch("https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/")
