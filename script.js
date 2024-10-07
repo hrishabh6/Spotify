@@ -96,45 +96,52 @@ const playMusic = (trackPath, trackName, pause = false) => {
 
 
 async function displayFolders() {
-    let a = await fetch("https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/")
-    let response =  await a.text();
-    let div = document.createElement("div")
-    div.innerHTML = response;
-    let anchors = div.getElementsByTagName("a")
+    try {
+        // Fetch the contents of the Songs directory
+        let response = await fetch("https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/");
+        let data = await response.json(); // Parse the JSON response
+        
+        let cardContainer = document.querySelector(".cardContainer");
+        cardContainer.innerHTML = ""; // Clear previous cards
 
-    let cardContainer = document.querySelector(".cardContainer")
-    let array = Array.from(anchors)
+        // Filter for directories and iterate through them
+        let folders = data.filter(item => item.type === "dir");
 
-    
-    for (let index = 0; index < array.length; index++) {
-        const e = array[index];
-   
-        if (e.href.includes("/Songs/")) {         
-            let folder = e.href.split("/")[4]
-            //getting the meta data of the folders
-                let a = await fetch(`/Songs/${folder}/info.json`);
-                let response = await a.json();
-                cardContainer.innerHTML = cardContainer.innerHTML + `<div class="card" data-folder="${folder}">
-                        <div class="circle">
-                            <i class="fa-sharp fa-solid fa-play"></i>
-                        </div>
-                        <img src="songs/${folder}/cover.jpeg" alt="Honey Singh">
-                        <h4>${response.description}</h4>
-                        <p>${response.title}</p>
-                    </div>`
-        }               
-    }
-    
-    Array.from(document.getElementsByClassName("card")).forEach(e => {
-        e.addEventListener("click", async () => {
-            // Accessing dataset folder correctly
-            let folder = e.dataset.folder; 
-            songs = await getSongs(`songs/${folder}`);
-            playMusic(songs[0], decodeURIComponent(songs[0]))
+        for (const folder of folders) {
+            let folderName = folder.name;
+
+            // Fetching the meta data of the folders
+            let infoResponse = await fetch(`https://raw.githubusercontent.com/hrishabh6/Spotify/main/Songs/${folderName}/info.json`);
+            let infoData = await infoResponse.json();
+
+            // Create card for each folder
+            cardContainer.innerHTML += `
+                <div class="card" data-folder="${folderName}">
+                    <div class="circle">
+                        <i class="fa-sharp fa-solid fa-play"></i>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/hrishabh6/Spotify/main/Songs/${folderName}/cover.jpeg" alt="${infoData.title}">
+                    <h4>${infoData.description}</h4>
+                    <p>${infoData.title}</p>
+                </div>
+            `;
+        }
+
+        // Add click event listeners to each card
+        Array.from(document.getElementsByClassName("card")).forEach(e => {
+            e.addEventListener("click", async () => {
+                // Accessing dataset folder correctly
+                let folder = e.dataset.folder;
+                let songs = await getSongs(`https://raw.githubusercontent.com/hrishabh6/Spotify/main/Songs/${folder}`);
+                playMusic(songs[0], decodeURIComponent(songs[0]));
+            });
         });
-    });
-    
+
+    } catch (error) {
+        console.error('Error fetching or parsing folder data:', error);
+    }
 }
+
 
 async function main() {
     //get songs from directory
