@@ -132,8 +132,19 @@ async function displayFolders() {
             e.addEventListener("click", async () => {
                 // Accessing dataset folder correctly
                 let folder = e.dataset.folder;
-                let songs = await getSongs(`https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/${folder}`);
-                playMusic(songs[0], decodeURIComponent(songs[0]));
+
+                // Fetch the songs from the folder
+                let songsResponse = await fetch(`https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/${folder}`);
+                let songsData = await songsResponse.json(); // Parse the JSON response
+
+                // Get the first song's download URL and name
+                if (songsData.length > 0) {
+                    const firstSong = songsData.find(song => song.name.endsWith('.mp3')); // Find the first .mp3 song
+                    if (firstSong) {
+                        const songDownloadUrl = firstSong.download_url; // Get the download URL
+                        playMusic(songDownloadUrl, firstSong.name); // Pass the URL and name to playMusic
+                    }
+                }
             });
         });
 
@@ -141,6 +152,7 @@ async function displayFolders() {
         console.error('Error fetching or parsing folder data:', error);
     }
 }
+
 
 
 async function main() {
