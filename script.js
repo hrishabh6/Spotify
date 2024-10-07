@@ -97,7 +97,7 @@ const playMusic = (trackPath, trackName,pause=false) => {
 }
 
 async function displayFolders() {
-    let a = await fetch(`/Songs/`)
+    let a = await fetch("https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/")
     let response =  await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
