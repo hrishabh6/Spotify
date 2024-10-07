@@ -142,6 +142,7 @@ async function displayFolders() {
                     const firstSong = songsData.find(song => song.name.endsWith('.mp3')); // Find the first .mp3 song
                     if (firstSong) {
                         const songDownloadUrl = firstSong.download_url; // Get the download URL
+                        songs = await getSongs(`https://api.github.com/repos/hrishabh6/Spotify/contents/Songs/${folder}`);
                         playMusic(songDownloadUrl, firstSong.name); // Pass the URL and name to playMusic
                     }
                 }
