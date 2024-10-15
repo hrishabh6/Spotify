@@ -233,22 +233,24 @@ async function main() {
         
     })
 
-    backward.addEventListener("click", ()=>{
-        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+    const backward = document.getElementById("backward");
+    const forward = document.getElementById("forward");
 
+    backward.addEventListener("click", () => {
+        let currentIndex = songs.findIndex(song => song.download_url === currentSong.src);
         
-        if(index > 0){
-            playMusic(songs[index-1], decodeURI(songs[index-1]))
+        if (currentIndex > 0) {
+            playMusic(songs[currentIndex - 1].download_url, decodeURI(songs[currentIndex - 1].name));
         }
-    })
-    forward.addEventListener("click", ()=>{
-        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+    });
 
+    forward.addEventListener("click", () => {
+        let currentIndex = songs.findIndex(song => song.download_url === currentSong.src);
         
-        if(index+1 < songs.length){
-            playMusic(songs[index+1], decodeURI(songs[index+1]).replaceAll("%", " ").replaceAll("2C", " "))
+        if (currentIndex + 1 < songs.length) {
+            playMusic(songs[currentIndex + 1].download_url, decodeURI(songs[currentIndex + 1].name));
         }
-    })
+    });
     
     document.querySelector(".volSeekBar").addEventListener("input", (e)=>{
         currentSong.volume = parseInt(e.target.value)/100;
