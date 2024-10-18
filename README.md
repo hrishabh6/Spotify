@@ -24,8 +24,52 @@ A fully functional **Spotify Clone** built using **vanilla HTML, CSS, and JavaSc
 Check out the live version of the project hosted on Vercel:  
 [Spotify Clone on Vercel](https://spotify-pi-blush.vercel.app/)
 
-## 📂 Project Setup
+### 📦 Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/hrishabh6/Spotify.git
+To run this project locally, follow these steps:
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/hrishabh6/Spotify.git
+    ```
+
+2. **Navigate to the project directory**:
+    ```bash
+    cd Spotify
+    ```
+
+3. **Open the `index.html` file** in your preferred web browser to view the app:
+    ```bash
+    open index.html
+    ```
+
+---
+
+### 📖 Usage
+
+You can directly open the `index.html` file in your browser for local viewing or deploy the project to a hosting platform like **Vercel** to make it live.
+
+---
+
+### 👨‍💻 Contributing
+
+Contributions, issues, and feature requests are welcome! If you would like to contribute:
+
+1. **Fork the repository**.
+2. **Create a new branch**.
+    ```bash
+    git checkout -b feature-branch
+    ```
+3. **Submit a pull request** with clear commit messages.
+
+---
+
+### ⚖️ License
+
+This project is licensed under the **MIT License**. Feel free to use it for your own purposes.
+
+---
+
+**© 2024 Spotify Clone Project**
+
+   
