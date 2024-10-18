@@ -2,7 +2,8 @@
 
 A fully functional **Spotify Clone** built using **vanilla HTML, CSS, and JavaScript**—with no backend involved! This project is a client-side implementation of a music player with features such as dynamic album loading, song controls, and a responsive design. 🚀
 
-![Spotify Clone Preview](https://your-image-url-here.png) <!-- Optional: Add a screenshot of your project -->
+![Spotify Clone Preview]![image](https://github.com/user-attachments/assets/cd298ebb-7222-4e91-b175-d33d380f893b)
+
 
 ## 🌟 Features
 
